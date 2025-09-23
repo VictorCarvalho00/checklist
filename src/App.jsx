@@ -1,5 +1,7 @@
+import { useState } from "react"
 import { ChecklistsWrapper } from "./components/ChecklistsWrapper"
 import { Container } from "./components/Container"
+import { Dialog } from "./components/Dialog"
 import { FabButton } from "./components/FabButton"
 import { Footer } from "./components/Footer"
 import { Header } from "./components/Header"
@@ -52,6 +54,13 @@ const completed = [
 
 function App() {
 
+  const [showDialog, setShowDialog] = useState(false)
+
+  const toggleDielog = () => {
+    setShowDialog(!showDialog)
+    console.log("TEste")
+  }
+  
   return (
     <main>
       <Container>
@@ -74,7 +83,8 @@ function App() {
             })}
           </ToDoList>
           <Footer>
-            <FabButton>
+            <Dialog isOpen={showDialog}/>
+            <FabButton onClick={toggleDielog}>
               <IconPlus />
             </FabButton>
           </Footer>
