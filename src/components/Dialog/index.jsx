@@ -1,8 +1,16 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import './dialog.styles.css'
+import { IconClose } from "../icons";
 
-export function Dialog() {
+export function Dialog({ isOpen, onClose, children }) {
     const dialogRef = useRef(null)
+    useEffect(() => {
+        if (isOpen) {
+            openDialog()
+        } else {
+            closeDialog()
+        }
+    }, [isOpen])
 
     const openDialog = () => {
         dialogRef.current.showModal();
@@ -14,9 +22,19 @@ export function Dialog() {
 
     return (
         <>
-            <dialog ref={dialogRef}>
-                <button autoFocus onClick={closeDialog}>Close</button>
-                <p>This modal dialog has a groovy backdrog!</p>
+            <dialog ref={dialogRef} className="dialog">
+                <div className="btn-close-wrapper ">
+                    <button
+                        autoFocus
+                        onClick={onClose}
+                        className="btn-close"
+                    >
+                        <IconClose />
+                    </button>
+                </div>
+                <div className="body">
+                    {children}
+                </div>
             </dialog>
             <button onClick={openDialog}>teste</button>
         </>
