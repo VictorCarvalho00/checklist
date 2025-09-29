@@ -3,7 +3,9 @@ import './dialog.styles.css'
 import { IconClose } from "../icons";
 
 export function Dialog({ isOpen, onClose, children }) {
+
     const dialogRef = useRef(null)
+
     useEffect(() => {
         if (isOpen) {
             openDialog()
@@ -36,7 +38,6 @@ export function Dialog({ isOpen, onClose, children }) {
                     {children}
                 </div>
             </dialog>
-            <button onClick={openDialog}>teste</button>
         </>
     )
 }
